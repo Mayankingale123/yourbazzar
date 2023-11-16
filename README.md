@@ -62,6 +62,8 @@ The seller feature in My E-commerce Site allows users to become sellers and add 
 
 6. Access the site in your web browser at `http://localhost:8000`.
 
+**https://www.youtube.com/watch?v=nuD6qNAurVM  // for setting up email password generate key
+
 ## Contribution
 
 Contributions to this project are welcome. If you encounter any issues or have suggestions for improvements, please create a new issue or submit a pull request.
