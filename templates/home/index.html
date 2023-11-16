@@ -1,0 +1,67 @@
+{% extends "base/base.html"%}
+
+{%  block start %}
+
+{% if messages %}
+    <div id="alert-box" class="alert alert-warning" style="width: 15%; float: right; background-color: black; padding: 5px; max-height: 100px; overflow-y: auto; position: relative;">
+        <div id="countdown-line" style="height: 10%; width: 1%; background-color: green; position: absolute; top: 0;"></div>
+        <ul class="messages" style="margin: 0; list-style-type: none;">
+            {% for message in messages %}
+                <li class="{{ message.tags }}" style="font-size: 12px;">
+                    <h4 style="margin: 0;">{{ message }}</h4>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<script>
+    // Add JavaScript to create a countdown line and remove the alert box when it ends
+    var alertBox = document.getElementById('alert-box');
+    var countdownLine = document.getElementById('countdown-line');
+
+    if (alertBox && countdownLine) {
+        var duration = 10; // 10 seconds
+        var interval = 100; // 100 milliseconds
+        var width = 100; // Initial width
+
+        var timer = setInterval(function() {
+            width -= (100 * interval / (duration * 1000));
+            countdownLine.style.width = width + '%';
+
+            if (width <= 0) {
+                clearInterval(timer); // Stop the timer
+                alertBox.style.display = 'none'; // Hide the alert box
+            }
+        }, interval);
+    }
+</script>
+
+<div class="container mt-5 pt-5">
+    <div class="row">
+        
+        {% for product in products %}
+        <div class="col-md-3">
+            <figure class="card card-product-grid">
+                <a href="{% url 'get_product' product.slug %}" class="title">
+                <div class="img-wrap"> <img src="/media/{{product.product_images.first.image}}"> </div>
+                <figcaption class="info-wrap border-top">
+                  
+                        <b>{{product.product_name}}</b>
+                    <div class="price mt-2">${{product.price}}.00</div> <!-- price-wrap.// -->
+                
+                </figcaption>
+            </a>
+            </figure> <!-- card // -->
+        </div> <!-- col.// -->
+
+        {% endfor %}
+      
+        
+       
+    </div>
+
+    </div>
+  
+
+{% endblock %}
